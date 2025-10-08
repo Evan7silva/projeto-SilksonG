@@ -1,6 +1,12 @@
-# Welcome to your Expo app 👋
+# 🎮 Projeto Silksong (Estudo React Native + Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este projeto foi criado para estudos de desenvolvimento mobile usando **React Native**, **Expo** e **TypeScript**, inspirado em **Hollow Knight: Silksong**.
+
+---
+
+## 📁 Estrutura de Pastas e Arquivos
+
+![alt text](<Primeira estrutura de pasta e arquivos.png>)
 
 ## Get started
 
