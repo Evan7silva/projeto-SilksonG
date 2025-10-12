@@ -1,23 +1,42 @@
 import { theme } from '@/theme/theme';
 import { useVideoPlayer, VideoView } from 'expo-video';
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { useEffect, useRef } from 'react';
+import { AppState, Dimensions, StyleSheet, View } from "react-native";
 
 // Definir Dimensions
-const { width, height } = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen');
 
 // Soucer de video 
-const videoSource = require('@/assets/media/background.mp4')
+const videoSource = require('@/assets/media/background.mp4');
 
 export default function App() {
 
     // Cria o useVideoPlayer
     const player = useVideoPlayer(videoSource, (player) => {
-        player.loop = true
-        player.play()
-        player.muted = true
+        player.loop = true;
+        player.play();
+        player.muted = true;
         // otimizar o carregamento e cache
         player.allowsExternalPlayback = false;
     })
+
+    // Refs e controla de estado do App
+    const appState = useRef(AppState.currentState);
+
+    useEffect(() => {
+        const subscrition = AppState.addEventListener("change", (nextState) => {
+            if ( nextState === "active" ) {
+                // Retoma o video quando o app volta
+                player.play();
+            } else {
+                // Pausa para evitar travar a reprodução
+                player.pause();
+            }
+            appState.current = nextState;
+        });
+        return () => subscrition.remove();
+    }, [player]);
+
     return (
         <View style={styles.container}>
             <VideoView
@@ -27,9 +46,6 @@ export default function App() {
                 nativeControls={false}
             />
             <View style={styles.contenOverlay}>
-                <Text style={styles.text}>SEGUE</Text>
-                <Text style={styles.text}>CURTE</Text>
-                <Text style={styles.text}>COMPARTILHA</Text>
             </View>
         </View>
     )

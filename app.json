@@ -13,13 +13,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundImage": "./assets/images/icon.png",
-        "monochromeImage": "./assets/images/adaptive-icon.png"
+        "monochromeImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#000000 "
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.evan_silva.silksong"
     },
     "web": {
       "output": "static",
@@ -33,17 +33,25 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#000000",
           "dark": {
+            "image": "./assets/images/splash-icon.png",
             "backgroundColor": "#000000"
           }
         }
       ],
-      "expo-video"
+      "expo-video",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9c10bc0f-cd89-4116-8e3d-b727f6e3dde4"
+      }
     }
   }
 }
