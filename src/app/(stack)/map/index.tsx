@@ -1,4 +1,5 @@
 import { height, width } from "@/app/_layout";
+import { colors } from "@/theme/colors";
 import { router } from "expo-router";
 import * as ScreenOrientation from 'expo-screen-orientation'; // Instalar pacote
 import { useState } from "react";
@@ -36,8 +37,16 @@ export default function Map() {
                 resizeMode="cover"
             >
                 <View style={styles.content}>
-                    <Button title="ABRIR MAP" onPress={openFullScreen} />
-                    <Button title="Voltar" onPress={() => router.back()} />
+                    <Button
+                        title="ABRIR MAP"
+                        color={
+                            colors.red[300]}
+                        onPress={openFullScreen} />
+                    <Button
+                        title="Voltar"
+                        color={
+                            colors.red[300]}
+                        onPress={() => router.back()} />
                 </View>
             </ImageBackground>
             {isFullScreen && (
@@ -50,7 +59,16 @@ export default function Map() {
                     backgroundColor="black"
                     swipeToCloseEnabled={false}
                     doubleTapToZoomEnabled={true}
-                    HeaderComponent={() => <Button title="FECHAR" onPress={closeFullScreen} />}
+                    HeaderComponent={() => (
+                        <View style={styles.button}>
+                            <Button
+                                title="FECHAR"
+                                color={
+                                    colors.red[300]}
+                                onPress={closeFullScreen}
+                            />
+                        </View>
+                    )}
                 />
             )}
 
@@ -66,12 +84,22 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "flex-end",
+        alignItems: "center",
+        paddingBottom: 100,
+        gap: 10,
     },
     styleImage: {
         flex: 1,
         width,
         height,
+    },
+    button: {
+        position: "absolute",
+        top: 20,
+        right: 20,
+        padding: 5,
+        borderRadius: 10,
+        zIndex: 10, // Garante que fique acima da imagem
     }
 })

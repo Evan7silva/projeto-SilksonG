@@ -23,19 +23,22 @@ export default function Layout() {
     player.loop = true;
     player.muted = true;
     player.allowsExternalPlayback = false;
+    // Tenta iniciar a reprodução imediatamente após a criação do player
+    // A função de callback só é executada quando o player está pronto para uso.
+    player.play();
   });
 
   // Garante que o player comece de fato
-  useEffect(() => {
-    const playVideo = async () => {
-      try {
-        await player.play();
-      } catch (e) {
-        console.warn("Erro ao iniciar vídeo:", e);
-      }
-    };
-    playVideo();
-  }, [player]);
+  //useEffect(() => {
+    //const playVideo = async () => {
+      //try {
+        //await player.play();
+      //} catch (e) {
+        //console.warn("Erro ao iniciar vídeo:", e);
+      //}
+    //};
+    //playVideo();
+  //}, [player]);
 
   const appState = useRef(AppState.currentState);
   useEffect(() => {
@@ -64,13 +67,13 @@ export default function Layout() {
           source={require("@/assets/loader/loaderHornet.gif")}
           style={styles.loaderGif}
         />
-        <ActivityIndicator size="large" color="#ff0000ff" />
+        <ActivityIndicator size="large" color={theme.colors.red[100]} />
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <VideoView
         player={player}
         style={styles.videoBackground}
@@ -83,6 +86,9 @@ export default function Layout() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   videoBackground: {
     ...StyleSheet.absoluteFillObject, // cobre toda a tela
     zIndex: -1,

@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 export default function Router() {
     return (
         <View style={styles.container}>
-            <Stack screenOptions={{ headerShown: false, contentStyle: {backgroundColor: 'transparent'} }} />
+            <Stack screenOptions={{ headerShown: false, contentStyle: {backgroundColor: 'transparent'}}} />
         </View>
     )
 }
