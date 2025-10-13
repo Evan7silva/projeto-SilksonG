@@ -1,10 +1,11 @@
 import { theme } from '@/theme/theme';
+import { router } from 'expo-router';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useEffect, useRef } from 'react';
-import { AppState, Dimensions, StyleSheet, View } from "react-native";
+import { AppState, Button, Dimensions, StyleSheet, View } from "react-native";
 
 // Definir Dimensions
-const { width, height } = Dimensions.get('screen');
+export const { width, height } = Dimensions.get('screen');
 
 // Soucer de video 
 const videoSource = require('@/assets/media/background.mp4');
@@ -46,6 +47,7 @@ export default function App() {
                 nativeControls={false}
             />
             <View style={styles.contenOverlay}>
+                <Button title='Map' onPress={() => router.navigate("/map")}/>
             </View>
         </View>
     )
