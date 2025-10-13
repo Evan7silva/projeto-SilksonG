@@ -1,4 +1,4 @@
-import { height, width } from "@/app";
+import { height, width } from "@/app/_layout";
 import { router } from "expo-router";
 import * as ScreenOrientation from 'expo-screen-orientation'; // Instalar pacote
 import { useState } from "react";
@@ -39,7 +39,7 @@ export default function Map() {
                     <Button title="ABRIR MAP" onPress={openFullScreen} />
                     <Button title="Voltar" onPress={() => router.back()} />
                 </View>
-                </ImageBackground>
+            </ImageBackground>
             {isFullScreen && (
                 <ImageViewing
                     images={[{ uri: Image.resolveAssetSource(imagemMap).uri }]}
@@ -50,10 +50,10 @@ export default function Map() {
                     backgroundColor="black"
                     swipeToCloseEnabled={false}
                     doubleTapToZoomEnabled={true}
-                    HeaderComponent={() => <Button title="FECHAR" onPress={closeFullScreen}/>}
+                    HeaderComponent={() => <Button title="FECHAR" onPress={closeFullScreen} />}
                 />
             )}
-            
+
 
         </View>
     )
