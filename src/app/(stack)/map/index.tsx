@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Button, Image, ImageBackground, StyleSheet, View } from "react-native";
 import ImageViewing from "react-native-image-viewing"; // Instalar pacote
 
-const imagemBottom = require("@/assets/images/bottom.png")
+const imagemBottom = require("@/assets/images/Hornet_sem_faiscas.png")
 const imagemMap = require("@/assets/images/map.png")
 
 export default function Map() {
@@ -14,6 +14,7 @@ export default function Map() {
     const [isFullScreen, setFullScreen] = useState(false)
 
     const openFullScreen = async () => {
+       
         try {
             await ScreenOrientation.lockAsync(
                 ScreenOrientation.OrientationLock.PORTRAIT
@@ -30,7 +31,6 @@ export default function Map() {
 
     return (
         <View style={styles.container}>
-
             <ImageBackground
                 source={imagemBottom}
                 style={styles.styleImage}
@@ -71,8 +71,6 @@ export default function Map() {
                     )}
                 />
             )}
-
-
         </View>
     )
 }

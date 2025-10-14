@@ -18,46 +18,35 @@ export default function Layout() {
 
   // Configuração do player de vídeo
   const [isReady, setIsReady] = useState(false);
-  
+
   const player = useVideoPlayer(videoSource, (player) => {
     player.loop = true;
     player.muted = true;
     player.allowsExternalPlayback = false;
     // Tenta iniciar a reprodução imediatamente após a criação do player
-    // A função de callback só é executada quando o player está pronto para uso.
     player.play();
   });
 
-  // Garante que o player comece de fato
-  //useEffect(() => {
-    //const playVideo = async () => {
-      //try {
-        //await player.play();
-      //} catch (e) {
-        //console.warn("Erro ao iniciar vídeo:", e);
-      //}
-    //};
-    //playVideo();
-  //}, [player]);
-
   const appState = useRef(AppState.currentState);
+
   useEffect(() => {
     const sub = AppState.addEventListener("change", (nextState) => {
-      if (nextState === "active") player.play();
-      else player.pause();
+      if (nextState === "active") {
+        player.play();
+      } else player.pause();
       appState.current = nextState;
-    });
+    })
     return () => sub.remove();
-  }, [player]);
+  }, [player])
 
   // ⏳ Controla o tempo do loader (garante mínimo de 2s)
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
+    let timer: ReturnType<typeof setTimeout>
     if (fontsLoaded) {
-      timer = setTimeout(() => setIsReady(true), 2000);
+      timer = setTimeout(() => setIsReady(true), 2000)
     }
     return () => clearTimeout(timer);
-  }, [fontsLoaded]);
+  }, [fontsLoaded])
 
   // Enquanto carrega fontes → mostra loader
   if (!isReady) {
@@ -80,7 +69,7 @@ export default function Layout() {
         contentFit="cover"
         nativeControls={false}
       />
-      <Stack screenOptions={{ headerShown: false, contentStyle: {backgroundColor: 'transparent'} }} />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: 'transparent' } }} />
     </View>
   );
 }
