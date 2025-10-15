@@ -1,20 +1,22 @@
 import { height, width } from "@/app/_layout";
-import { colors } from "@/theme/colors";
+import { Button } from "@/components/Button";
+import { CloseButton } from "@/components/CloseButton";
 import { router } from "expo-router";
 import * as ScreenOrientation from 'expo-screen-orientation'; // Instalar pacote
 import { useState } from "react";
-import { Button, Image, ImageBackground, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import ImageViewing from "react-native-image-viewing"; // Instalar pacote
 
 const imagemBottom = require("@/assets/images/Hornet_sem_faiscas.png")
 const imagemMap = require("@/assets/images/map.png")
+const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
 
 export default function Map() {
 
     const [isFullScreen, setFullScreen] = useState(false)
 
     const openFullScreen = async () => {
-       
+
         try {
             await ScreenOrientation.lockAsync(
                 ScreenOrientation.OrientationLock.PORTRAIT
@@ -31,22 +33,18 @@ export default function Map() {
 
     return (
         <View style={styles.container}>
+           
+                
+            
             <ImageBackground
                 source={imagemBottom}
                 style={styles.styleImage}
                 resizeMode="cover"
             >
+                <Image style={{width: "auto", height: 200, marginTop: 20}} source={imageLogo}/>
                 <View style={styles.content}>
-                    <Button
-                        title="ABRIR MAP"
-                        color={
-                            colors.red[300]}
-                        onPress={openFullScreen} />
-                    <Button
-                        title="Voltar"
-                        color={
-                            colors.red[300]}
-                        onPress={() => router.back()} />
+                    <Button title="ABRIR MAPA" onPress={openFullScreen} />
+                    <Button title="VOLTAR" onPress={() => router.back()} />
                 </View>
             </ImageBackground>
             {isFullScreen && (
@@ -60,14 +58,7 @@ export default function Map() {
                     swipeToCloseEnabled={false}
                     doubleTapToZoomEnabled={true}
                     HeaderComponent={() => (
-                        <View style={styles.button}>
-                            <Button
-                                title="FECHAR"
-                                color={
-                                    colors.red[300]}
-                                onPress={closeFullScreen}
-                            />
-                        </View>
+                        <CloseButton onPress={closeFullScreen} />
                     )}
                 />
             )}
@@ -78,7 +69,6 @@ export default function Map() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     content: {
         flex: 1,
@@ -92,12 +82,4 @@ const styles = StyleSheet.create({
         width,
         height,
     },
-    button: {
-        position: "absolute",
-        top: 20,
-        right: 20,
-        padding: 5,
-        borderRadius: 10,
-        zIndex: 10, // Garante que fique acima da imagem
-    }
 })

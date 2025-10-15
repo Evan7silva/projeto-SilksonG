@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, AppState, Dimensions, Image, StyleSheet, View } from "react-native";
 
 export const { width, height } = Dimensions.get("screen");
-const videoSource = require("@/assets/media/background.mp4");
+const videoSource = require("@/assets/media/video_2025-10-15_12-29-11.mp4");
 
 export default function Layout() {
   // Carreaga fontes
@@ -66,7 +66,7 @@ export default function Layout() {
       <VideoView
         player={player}
         style={styles.videoBackground}
-        contentFit="cover"
+        contentFit="fill"
         nativeControls={false}
       />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: 'transparent' } }} />
@@ -81,6 +81,8 @@ const styles = StyleSheet.create({
   videoBackground: {
     ...StyleSheet.absoluteFillObject, // cobre toda a tela
     zIndex: -1,
+    position: "absolute",
+    right: -7,
   },
   loaderContainer: {
     flex: 1,
