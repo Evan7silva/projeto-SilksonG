@@ -2,16 +2,17 @@ import { theme } from "@/theme/theme"
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
 
 type closeButtonProps = TouchableOpacityProps & {
+    title: string
     onPress: () => void
 }
 
-export function CloseButton({ onPress, ...rest }: closeButtonProps) {
+export function CloseButton({ onPress, title, ...rest }: closeButtonProps) {
     return (
         <TouchableOpacity
             style={styles.closeButton}
             activeOpacity={0.7}
             onPress={onPress} {...rest}>
-            <Text style={styles.textButton}>FECHAR</Text>
+            <Text style={styles.textButton}>{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -19,15 +20,13 @@ export function CloseButton({ onPress, ...rest }: closeButtonProps) {
 const styles = StyleSheet.create({
     closeButton: {
         position: "absolute",
-        top: 20,
+        top: 30,
         right: 20,
-        padding: 5,
-        backgroundColor: theme.colors.black[300],
+        zIndex: 40,
     },
     textButton: {
         fontFamily: theme.fonts.title,
         fontSize: theme.textSizes.large,
         color: theme.colors.white[300],
-        zIndex: 2,
     }
 })
