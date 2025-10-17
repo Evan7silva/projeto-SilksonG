@@ -19,6 +19,7 @@ const ImageZoom = ImageZoomLib as any
 const imagemBottom = require("@/assets/images/Hornet_sem_faiscas.png")
 const imagemMap = require("@/assets/images/map.png")
 const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
+const imageMarker = require("@/assets/images/marker16x16.png")
 
 const { width, height } = Dimensions.get("screen")
 
@@ -118,31 +119,42 @@ export default function Map() {
             cropHeight={height}
             imageWidth={width}
             imageHeight={height}
-            enableDoubleClickZoom={true}
+            enableDoubleClickZoom={false}
             pinchToZoom={true}
             minScale={1}
-            maxScale={8}
+            maxScale={10}
             
           >
-            <View>
+            <View style= {{flex: 1, alignContent: "center", alignItems: "center"}}>
               <Image
-                style={{ width, height, resizeMode: "contain" }}
+                style={{ width: width * 1.1, height: height * 1.1, resizeMode: "contain" }}
                 source={imagemMap}
               />
 
               {/* 🔴 Marcadores visuais */}
               {markers.map((m, i) => (
-                <TouchableOpacity
+                <View
+                
                   key={i}
-                  style={[
-                    styles.marker,
-                    {
-                      left: m.x * width - 3,
-                      top: m.y * height - 3,
-                    },
-                  ]}
+                  style={{
+                    position: "absolute",
+                    left: m.x * width - 3,
+                    top: m.y * height - 3,
+                    zIndex: 25,
+                  }}
+                  pointerEvents="box-none"
+                  >
+                  <TouchableOpacity
                   onPress={() => handleRemoveMarker(i)}
-                />
+                  activeOpacity={0.8}
+                >
+                  <Image
+                   source={imageMarker}
+                    style={{ width: 6, height: 6, resizeMode: "contain"}}
+                    
+                  />
+                </TouchableOpacity>
+                </View>
               ))}
 
               {isAddingMarker && (
