@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button"
 import { CloseButton } from "@/components/CloseButton"
+import { ImagemButton } from "@/components/ImageButton"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { router } from "expo-router"
 import * as ScreenOrientation from "expo-screen-orientation"
@@ -20,6 +21,8 @@ const imagemBottom = require("@/assets/images/Hornet_sem_faiscas.png")
 const imagemMap = require("@/assets/images/map.png")
 const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
 const imageMarker = require("@/assets/images/marker16x16.png")
+const imageButtonMarker = require("@/assets/images/buttonMarker64x64.png")
+const imagemZoomMap = require ("@/assets/images/zoomMap.png")
 
 const { width, height } = Dimensions.get("screen")
 
@@ -105,15 +108,17 @@ export default function Map() {
       {isFullScreen && (
         <View style={styles.fullscreen}>
           <CloseButton title="FECHAR" onPress={closeFullScreen} />
-          <CloseButton
-            title="MARCADOR"
-            style={{ position: "absolute", top: 30, zIndex: 40 }}
-            onPress={() => setIsAddingMarker(true)} />
-          <CloseButton
-            title="MOVER MAPA"
-            style={{ position: "absolute", top: 80, zIndex: 40 }}
-            onPress={() => setIsAddingMarker(false)} />
-
+          <ImagemButton 
+            source={imageButtonMarker}
+            onPress={() => setIsAddingMarker(true)}
+            style={{ position: "absolute", top: 40, left: 5, zIndex: 40 }}
+          />
+          <ImagemButton 
+            source={imagemZoomMap}
+            onPress={() => setIsAddingMarker(false)}
+            style={{ position: "absolute", top: 50, left: 80, zIndex: 40 }}
+          />
+          
           <ImageZoom
             cropWidth={width}
             cropHeight={height}
