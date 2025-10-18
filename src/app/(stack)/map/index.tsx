@@ -22,7 +22,7 @@ const imagemMap = require("@/assets/images/map.png")
 const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
 const imageMarker = require("@/assets/images/marker16x16.png")
 const imageButtonMarker = require("@/assets/images/buttonMarker64x64.png")
-const imagemZoomMap = require ("@/assets/images/zoomMap.png")
+const imageZoomMap = require ("@/assets/images/zoomMap.png")
 
 const { width, height } = Dimensions.get("screen")
 
@@ -114,7 +114,7 @@ export default function Map() {
             style={{ position: "absolute", top: 40, left: 5, zIndex: 40 }}
           />
           <ImagemButton 
-            source={imagemZoomMap}
+            source={imageZoomMap}
             onPress={() => setIsAddingMarker(false)}
             style={{ position: "absolute", top: 50, left: 80, zIndex: 40 }}
           />
@@ -145,17 +145,20 @@ export default function Map() {
                     position: "absolute",
                     left: m.x * width - 3,
                     top: m.y * height - 3,
-                    zIndex: 25,
+                    zIndex: 20,
                   }}
-                  pointerEvents="box-none"
+                  
                   >
+                  
                   <TouchableOpacity
+                  
                   onPress={() => handleRemoveMarker(i)}
                   activeOpacity={0.8}
+                  disabled={!isAddingMarker}
                 >
                   <Image
                    source={imageMarker}
-                    style={{ width: 6, height: 6, resizeMode: "contain"}}
+                    style={{ width: 6, height: 6, resizeMode: "contain" }}
                     
                   />
                 </TouchableOpacity>
@@ -198,23 +201,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
   },
-  marker: {
-    position: "absolute",
-    width: 5,
-    height: 5,
-    borderRadius: 10,
-    backgroundColor: "rgba(255, 0, 0, 0.8)",
-    borderWidth: 0.5,
-    borderColor: "white",
-    zIndex: 20, // garante estar acima visualmente
-  },
   touchLayer: {
     position: "absolute",
     top: 0,
     left: 0,
     width: width,
     height: height,
-    zIndex: 10,
   },
 
 
