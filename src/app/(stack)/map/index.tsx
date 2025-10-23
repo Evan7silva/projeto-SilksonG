@@ -17,7 +17,7 @@ import ImageZoomLib from "react-native-image-pan-zoom"
 const ImageZoom = ImageZoomLib as any
 
 
-const imagemBottom = require("@/assets/images/Hornet_sem_faiscas.png")
+const imagemBottom = require("@/assets/images/imagem_formato_mobile-2x.png")
 const imagemMap = require("@/assets/images/map.png")
 const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
 const imageMarker = require("@/assets/images/marker16x16.png")
@@ -31,9 +31,10 @@ export default function Map() {
   const [isFullScreen, setFullScreen] = useState(false)
   const [markers, setMarkers] = useState<{ x: number; y: number }[]>([])
   const [isAddingMarker, setIsAddingMarker] = useState(false)
+  const [ activeButton, setActiveButton ] = useState<"zoom" | "marker">("zoom")
 
 
-  // 🔁 Carregar marcadores salvos
+  // Carregar marcadores salvos
   useEffect(() => {
     (async () => {
       try {
@@ -47,7 +48,7 @@ export default function Map() {
     })()
   }, [])
 
-  // 💾 Salvar marcadores
+  // Salvar marcadores
   const saveMarkers = async (data: { x: number; y: number }[]) => {
     try {
       await AsyncStorage.setItem("mapMarkers", JSON.stringify(data))
@@ -56,7 +57,7 @@ export default function Map() {
     }
   }
 
-  // 🖱️ Adicionar marcador
+  // Adicionar marcador
   const handleAddMarker = (event: any) => {
     const { locationX, locationY } = event.nativeEvent
     const relativeX  = locationX / width 
@@ -66,19 +67,19 @@ export default function Map() {
     saveMarkers(newMarkers)
   }
 
-  // ❌ Remover marcador
+  // Remover marcador
   const handleRemoveMarker = (index: number) => {
     const updated = markers.filter((_, i) => i !== index)
     setMarkers(updated)
     saveMarkers(updated)
   }
-  // 🧹 Resetar todos os marcadores
+  // Resetar todos os marcadores
   const resetMarkers = async () => {
     await AsyncStorage.removeItem("mapMarkers") // apaga do armazenamento
     setMarkers([]) // limpa do estado atual
   }
 
-  // 🧭 Tela cheia
+  // Tela cheia
   const openFullScreen = async () => {
     try {
       await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
@@ -99,7 +100,7 @@ export default function Map() {
           <Image style={{ width: "auto", height: 200, marginTop: 20 }} source={imageLogo} />
           <View style={styles.content}>
             <Button title="ABRIR MAPA" onPress={openFullScreen} />
-            <Button title="RESETAR MARCADORES" onPress={resetMarkers} />
+            {/*<Button title="RESETAR MARCADORES" onPress={resetMarkers} />*/}
             <Button title="VOLTAR" onPress={() => router.back()} />
           </View>
         </ImageBackground>
@@ -110,13 +111,31 @@ export default function Map() {
           <CloseButton title="FECHAR" onPress={closeFullScreen} />
           <ImagemButton 
             source={imageButtonMarker}
-            onPress={() => setIsAddingMarker(true)}
-            style={{ position: "absolute", top: 40, left: 5, zIndex: 40 }}
+            onPress={() => {
+              setIsAddingMarker(true)
+              setActiveButton("marker")
+            }}
+            style={{ 
+              position: "absolute", 
+              top: 40, 
+              left: 5, 
+              zIndex: 40,
+              opacity: activeButton === "marker" ? 1 : 0.5,
+            }}
           />
           <ImagemButton 
             source={imageZoomMap}
-            onPress={() => setIsAddingMarker(false)}
-            style={{ position: "absolute", top: 50, left: 80, zIndex: 40 }}
+            onPress={() => {
+              setIsAddingMarker(false)
+              setActiveButton("zoom")
+            }}
+            style={{ 
+              position: "absolute", 
+              top: 50, 
+              left: 80, 
+              zIndex: 40, 
+              opacity: activeButton === "zoom" ? 1 : 0.5,
+            }}
           />
           
           <ImageZoom
