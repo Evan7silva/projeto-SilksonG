@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     textButton: {
-        fontFamily: theme.fonts.title,
+        fontFamily: theme.fonts.button,
         fontSize: theme.textSizes.large,
         color: theme.colors.white[300],
 

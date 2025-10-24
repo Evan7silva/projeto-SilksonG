@@ -7,6 +7,7 @@ export const theme = {
     title: "ImFellDoublePica",
     text: "LibreBaskervilleRegular",
     italic: "LibreBaskervilleItalic",
+    button: "Cinzel"
   },
   textSizes: {
     title: 32,

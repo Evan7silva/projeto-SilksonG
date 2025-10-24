@@ -12,6 +12,8 @@ export default function Layout() {
   // Carreaga fontes
   const [fontsLoaded] = useFonts({
     ImFellDoublePica: require("../../assets/fonts/ImFellDoublePica/IMFellDoublePica-Regular.ttf"),
+    ImFellFrenchCanonSC: require("../../assets/fonts/ImFellFrenchCanonSC/IMFellFrenchCanonSC-Regular.ttf"),
+    Cinzel: require("../../assets/fonts/Cinzel/Cinzel-SemiBold.ttf"),
     LibreBaskervilleRegular: require("../../assets/fonts/LibreBaskerville/LibreBaskerville-Regular.ttf"),
     LibreBaskervilleItalic: require("../../assets/fonts/LibreBaskerville/LibreBaskerville-Italic.ttf"),
   });

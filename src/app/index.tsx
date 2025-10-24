@@ -1,15 +1,15 @@
 import { Button } from "@/components/Button";
+import { ImageLogo } from "@/components/ImageLogo";
 import { router } from "expo-router";
-import { Image, StyleSheet, View } from "react-native";
-
-const imageLogo = require("@/assets/images/silksong_logo_white-fs8.png")
+import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Image style={{width: "auto", height: 200, marginTop: 20}} source={imageLogo}/>
+      <ImageLogo/>
       <View style={styles.content}>
-        <Button title="MAPA" onPress={() => router.navigate("/map")} />
+        <Button title="Brasões" onPress={() => router.navigate("/blazon")}/>
+        <Button title="Mapa" onPress={() => router.navigate("/map")} />
       </View>
     </View>
 

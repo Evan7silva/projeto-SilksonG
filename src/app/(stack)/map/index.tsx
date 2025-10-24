@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button"
 import { CloseButton } from "@/components/CloseButton"
 import { ImagemButton } from "@/components/ImageButton"
+import { ImageLogo } from "@/components/ImageLogo"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { router } from "expo-router"
 import * as ScreenOrientation from "expo-screen-orientation"
@@ -97,18 +98,18 @@ export default function Map() {
     <View style={styles.container}>
       {!isFullScreen && (
         <ImageBackground source={imagemBottom} style={styles.styleImage} resizeMode="cover">
-          <Image style={{ width: "auto", height: 200, marginTop: 20 }} source={imageLogo} />
+          <ImageLogo/>
           <View style={styles.content}>
-            <Button title="ABRIR MAPA" onPress={openFullScreen} />
+            <Button title="Abrir Mapa" onPress={openFullScreen} />
             {/*<Button title="RESETAR MARCADORES" onPress={resetMarkers} />*/}
-            <Button title="VOLTAR" onPress={() => router.back()} />
+            <Button title="Voltar" onPress={() => router.back()} />
           </View>
         </ImageBackground>
       )}
 
       {isFullScreen && (
         <View style={styles.fullscreen}>
-          <CloseButton title="FECHAR" onPress={closeFullScreen} />
+          <CloseButton title="Fechar" onPress={closeFullScreen} />
           <ImagemButton 
             source={imageButtonMarker}
             onPress={() => {
@@ -227,6 +228,4 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
   },
-
-
 })
