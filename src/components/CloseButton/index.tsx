@@ -20,7 +20,7 @@ export function CloseButton({ onPress, title, ...rest }: closeButtonProps) {
 const styles = StyleSheet.create({
     closeButton: {
         position: "absolute",
-        top: 30,
+        top: 35,
         right: 20,
         zIndex: 40,
     },
