@@ -8,6 +8,7 @@ export default function Index() {
     <View style={styles.container}>
       <ImageLogo/>
       <View style={styles.content}>
+        <Button title="Ferramentas" onPress={() => router.navigate("/tools")}/>
         <Button title="Brasões" onPress={() => router.navigate("/blazon")}/>
         <Button title="Mapa" onPress={() => router.navigate("/map")} />
       </View>

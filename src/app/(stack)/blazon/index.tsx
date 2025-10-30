@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { CloseButton } from "@/components/CloseButton";
 import { ImageLogo } from "@/components/ImageLogo";
 import { theme } from "@/theme/theme";
-import { Blazon, listBlazon } from "@/utils";
+import { Blazon, listBlazon } from "@/utils/listBlazon";
 import { router } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useRef, useState } from "react";
@@ -153,12 +153,12 @@ export default function Blasoes() {
                     <Button title="Voltar" onPress={() => router.back()} />
                 </View>
             </ImageBackground>
-            <Modal 
-            transparent
-            visible={showModal} 
-            animationType="fade" 
-            statusBarTranslucent={true}
-            onRequestClose={() => setShowModal(false)}
+            <Modal
+                transparent
+                visible={showModal}
+                animationType="fade"
+                statusBarTranslucent={true}
+                onRequestClose={() => setShowModal(false)}
             >
                 {selectedItem && (
                     <View style={styles.modal}>
@@ -173,9 +173,9 @@ export default function Blasoes() {
                             <Text style={styles.nameBlazonModal}>{selectedItem.nomeBrasao}</Text>
                             <Text style={styles.textDecriptionModal}>{selectedItem.descricaoBrasao}</Text>
                             <Text style={styles.textControlModal}>{selectedItem.controleBrasao}</Text>
-                            <Image 
-                            source={selectedItem.imageFooterModal}
-                            style={{margin: 10, width:20, height:20}}
+                            <Image
+                                source={selectedItem.imageFooterModal}
+                                style={{ margin: 10, width: 20, height: 20 }}
                             />
 
                         </View>
@@ -195,10 +195,10 @@ export default function Blasoes() {
                                 doubleTapToZoomEnabled={true}
                                 HeaderComponent={() => <CloseButton
                                     title="Fechar"
-                                    style={{ position: "absolute" ,alignItems: "flex-end", right: 20, }}
+                                    style={{ position: "absolute", alignItems: "flex-end", right: 20, }}
                                     onPress={closeFullScreen}
                                 />
-                            }
+                                }
                             />
                         )}
                     </View>
@@ -208,6 +208,18 @@ export default function Blasoes() {
 
         </View>
     );
+}
+
+const textSizesSmall = {
+    fontFamily: theme.fonts.text,
+    fontSize: theme.textSizes.small,
+    color: theme.colors.white[300]
+}
+
+const textSizesTitle = {
+    fontFamily: theme.fonts.text,
+    fontSize: theme.textSizes.small,
+    color: theme.colors.white[300]
 }
 
 const styles = StyleSheet.create({
@@ -259,26 +271,18 @@ const styles = StyleSheet.create({
         height: 260,
     },
     textModal: {
-        fontFamily: theme.fonts.text,
-        fontSize: theme.textSizes.small,
-        color: theme.colors.white[300]
+        ...textSizesSmall
     },
     textDecriptionModal: {
-        fontFamily: theme.fonts.text,
-        fontSize: theme.textSizes.small,
+        ...textSizesSmall,
         textAlign: "center",
-        color: theme.colors.white[300],
         paddingHorizontal: 10,
         paddingVertical: 20,
     },
     textControlModal: {
-        fontFamily: theme.fonts.text,
-        fontSize: theme.textSizes.small,
-        color: theme.colors.white[300],
+        ...textSizesSmall
     },
     nameBlazonModal: {
-        fontFamily: theme.fonts.button,
-        fontSize: theme.textSizes.title,
-        color: theme.colors.white[300]
+        ...textSizesTitle
     }
 });
